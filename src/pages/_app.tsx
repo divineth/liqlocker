@@ -30,9 +30,7 @@ import { i18n } from '@lingui/core'
 import store from '../state'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import PriceProvider  from '../contexts/priceContext'
 import FarmContext from '../contexts/farmContext'
-import { usePricesApi } from '../features/farm/hooks'
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3'
 
 const Web3ProviderNetwork = dynamic(() => import('../components/Web3ProviderNetwork'), { ssr: false })
@@ -138,7 +136,6 @@ function MyApp({
             <Web3ProviderNetworkBridge getLibrary={getLibrary}>
               <Web3ReactManager>
                 <ReduxProvider store={store}>
-                  <PriceProvider>
                     <>
                       <ListsUpdater />
                       <UserUpdater />
@@ -153,7 +150,6 @@ function MyApp({
                         </Guard>
                       </Layout>
                     </Provider>
-                  </PriceProvider>
                 </ReduxProvider>
               </Web3ReactManager>
             </Web3ProviderNetworkBridge>
