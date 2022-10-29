@@ -2,18 +2,13 @@ import { Action, ThunkAction, combineReducers, configureStore, getDefaultMiddlew
 import { load, save } from 'redux-localstorage-simple'
 
 import application from './application/reducer'
-import burn from './burn/reducer'
 import create from './create/reducer'
-import limitOrder from './limit-order/reducer'
 import lists from './lists/reducer'
-import mint from './mint/reducer'
 import multicall from './multicall/reducer'
-import swap from './swap/reducer'
 import transactions from './transactions/reducer'
 import bridgeTransactions from './bridgeTransactions/reducer'
 import { updateVersion } from './global/actions'
 import user from './user/reducer'
-import zap from './zap/reducer'
 
 const PERSISTED_KEYS: string[] = ['user', 'transactions', 'lists', 'bridgeTransactions']
 
@@ -22,13 +17,8 @@ const reducer = combineReducers({
   user,
   transactions,
   bridgeTransactions,
-  swap,
-  mint,
-  burn,
   multicall,
   lists,
-  zap,
-  limitOrder,
   create,
 })
 
