@@ -1,6 +1,7 @@
 ## Specifying Supported Chain
 1. Open src/connectors/index.ts.
-2. Uncomment your preferred chain in the injected variable (Line 50)
+2. Change defaultChainID in line 40 to prefered chainID.
+3. Uncomment your preferred chain in the injected variable (Line 50)
 3. Open src/components/Web3ReactManager/index.tsx.
 4. Set the variable params (Line 62) to your preferred chain.
 
