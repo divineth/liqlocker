@@ -127,28 +127,28 @@ export const SUPPORTED_NETWORKS: {
   //   rpcUrls: ['https://exchainrpc.okex.org'],
   //   blockExplorerUrls: ['https://www.oklink.com/okexchain'],
   // },
-  // [ChainId.ARBITRUM]: {
-  //   chainId: '0xA4B1',
-  //   chainName: 'Arbitrum',
-  //   nativeCurrency: {
-  //     name: 'Ethereum',
-  //     symbol: 'ETH',
-  //     decimals: 18,
-  //   },
-  //   rpcUrls: ['https://arb1.arbitrum.io/rpc'],
-  //   blockExplorerUrls: ['https://mainnet-arb-explorer.netlify.app'],
-  // },
-  [ChainId.MOONRIVER]: {
-    chainId: '0x505',
-    chainName: 'Moonriver',
+  [ChainId.ARBITRUM]: {
+    chainId: '0xA4B1',
+    chainName: 'Arbitrum',
     nativeCurrency: {
-      name: 'Moonriver',
-      symbol: 'MOVR',
+      name: 'Ethereum',
+      symbol: 'ETH',
       decimals: 18,
     },
-    rpcUrls: ['https://rpc.moonriver.moonbeam.network','https://moonriver.api.onfinality.io/public'],
-    blockExplorerUrls: ['https://blockscout.moonriver.moonbeam.network/'],
+    rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+    blockExplorerUrls: ['https://mainnet-arb-explorer.netlify.app'],
   },
+  // [ChainId.MOONRIVER]: {
+  //   chainId: '0x505',
+  //   chainName: 'Moonriver',
+  //   nativeCurrency: {
+  //     name: 'Moonriver',
+  //     symbol: 'MOVR',
+  //     decimals: 18,
+  //   },
+  //   rpcUrls: ['https://rpc.moonriver.moonbeam.network','https://moonriver.api.onfinality.io/public'],
+  //   blockExplorerUrls: ['https://blockscout.moonriver.moonbeam.network/'],
+  // },
 }
 
 export default function NetworkModal(): JSX.Element | null {
