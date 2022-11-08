@@ -52,7 +52,7 @@ export const injected = new InjectedConnector({
     // 1, // mainnet
     // 3, // ropsten
     // 4, // rinkeby
-    5, // goreli
+    // 5, // goreli
     // 42, // kovan
     // 250, // fantom
     // 4002, // fantom testnet
@@ -71,14 +71,14 @@ export const injected = new InjectedConnector({
     // 1666700000, // harmony testnet
     // 66, // okex testnet
     // 65, // okex testnet
-    // 42161, // arbitrum
+    42161, // arbitrum
     // 42220, // celo
   ],
 })
 
 export const bridgeInjected = new InjectedConnector({
   supportedChainIds: [
-    1, // mainnet
+    // 1, // mainnet
     // 3, // ropsten
     // 4, // rinkeby
     // 5, // goreli
@@ -88,10 +88,10 @@ export const bridgeInjected = new InjectedConnector({
     // 137, // matic
     // 80001, // matic testnet
     // 100, // xdai
-    56, // binance smart chain
+    // 56, // binance smart chain
     // 97, // binance smart chain testnet
     // 1287, // moonbase
-    1285, // moonriver
+    // 1285, // moonriver
     // 43114, // avalanche
     // 43113, // fuji
     // 128, // heco
@@ -100,7 +100,7 @@ export const bridgeInjected = new InjectedConnector({
     // 1666700000, // harmony testnet
     // 66, // okex testnet
     // 65, // okex testnet
-    // 42161, // arbitrum
+    42161, // arbitrum
     // 42220, // celo
   ],
 })
