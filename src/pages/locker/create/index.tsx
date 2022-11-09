@@ -381,28 +381,6 @@ export default function CreateLocker(): JSX.Element {
                       </div>
                     </div>
                   </div>
-                  {/* <div className={`col-span-12 bg-dark-800 px-6 py-4 rounded`}>
-                    <div className="mb-2 text-2xl text-emphesis">{i18n._(t`How to use`)}</div>
-                    <div className="mb-4 text-base text-secondary">
-                      <p>
-                        {i18n._(
-                          t`- Input your token or liquidity pair address, amount of tokens to lock, withdrawer address and when tokens will become unlocked`
-                        )}
-                      </p>
-                      <p>{i18n._(t`- Click on "Approve" to allow the contract to transfer your tokens`)}</p>
-                      <p>{i18n._(t`- Click on "Deposit" to lock your tokens into locker contract`)}</p>
-                    </div>
-                    <div className="mb-2 text-2xl text-emphesis">{i18n._(t`Fees`)}</div>{' '}
-                    <div className="mb-4 text-base text-secondary">
-                      <p>{i18n._(t`- 0.1 MOVR to lock`)}</p>
-                    </div>
-                    <div className="mb-2 text-2xl text-emphesis">{i18n._(t`Considerations`)}</div>{' '}
-                    <div className="mb-4 text-base text-secondary">
-                      <p>{i18n._(t`- You will not be able to withdraw your tokens before the unlock time`)}</p>
-                      <p>{i18n._(t`- Locker contract address: ${LOCKER_ADDRESS[chainId || 1285]}`)}</p>
-                      <p>{i18n._(t`- Always DYOR`)}</p>
-                    </div>
-                  </div> */}
                 </div>
               </Card>
             </div>
