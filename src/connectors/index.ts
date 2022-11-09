@@ -52,7 +52,7 @@ export const injected = new InjectedConnector({
     // 1, // mainnet
     // 3, // ropsten
     // 4, // rinkeby
-    5, // goreli
+    // 5, // goreli
     // 42, // kovan
     // 250, // fantom
     // 4002, // fantom testnet
@@ -71,7 +71,7 @@ export const injected = new InjectedConnector({
     // 1666700000, // harmony testnet
     // 66, // okex testnet
     // 65, // okex testnet
-    // 42161, // arbitrum
+    42161, // arbitrum
     // 42220, // celo
   ],
 })

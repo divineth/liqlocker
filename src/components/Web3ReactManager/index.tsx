@@ -59,7 +59,7 @@ export default function Web3ReactManager({ children }: { children: JSX.Element }
   useEffect(() => {
     if (window && window.ethereum && router.route !== '/bridge' && router.route !== '/bridge/history') {
       const provider: any = window.ethereum
-      const params = SUPPORTED_NETWORKS[ChainId.GÖRLI]
+      const params = SUPPORTED_NETWORKS[ChainId.ARBITRUM]
 
       if (provider) {
         try {
