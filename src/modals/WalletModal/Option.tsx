@@ -40,7 +40,7 @@ export default function Option({
     >
       <div>
         <div className="flex items-center">
-          {active && <div className="w-4 h-4 mr-4 rounded-full bg-yellow" />}
+          {active && <div className="w-4 h-4 mr-4 rounded-full bg-primary-text" />}
           {header}
         </div>
         {subheader && <SubHeader>{subheader}</SubHeader>}
@@ -55,6 +55,6 @@ export default function Option({
   return !active ? (
     content
   ) : (
-    <div className="w-full p-px rounded bg-gradient-to-r from-yellow to-yellow">{content}</div>
+    <div className="w-full p-px rounded bg-gradient-to-r from-primary-text to-primary-text">{content}</div>
   )
 }

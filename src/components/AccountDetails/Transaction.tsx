@@ -81,7 +81,7 @@ const Transaction: FC<{ hash: string }> = ({ hash }) => {
   if (!chainId) return null
 
   return (
-    <div className="flex flex-col gap-2 bg-dark-800 rounded py-1 px-3 w-full">
+    <div className="flex flex-col gap-2 bg-primary-bg rounded py-1 px-3 w-full">
       <ExternalLink
         href={getExplorerLink(chainId, hash, 'transaction')}
         className="flex items-center justify-between gap-2"
@@ -91,7 +91,7 @@ const Transaction: FC<{ hash: string }> = ({ hash }) => {
         </Typography>
         <div
           className={classNames(
-            pending ? 'text-primary' : success ? 'text-yellow' : cancelled ? 'text-red' : 'text-red'
+            pending ? 'text-primary' : success ? 'text-primary-text' : cancelled ? 'text-red' : 'text-red'
           )}
         >
           {pending ? (

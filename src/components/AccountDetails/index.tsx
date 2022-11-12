@@ -66,7 +66,7 @@ const AccountDetails: FC<AccountDetailsProps> = ({
           SUPPORTED_WALLETS[k].connector === connector && (connector !== injected || isMetaMask === (k === 'METAMASK'))
       )
       .map((k) => SUPPORTED_WALLETS[k].name)[0]
-    return <div className="font-medium text-baseline text-secondary">{i18n._(t`Connected with ${name}`)}</div>
+    return <div className="font-medium text-baseline">{i18n._(t`Connected with ${name}`)}</div>
   }
 
   function getStatusIcon() {
@@ -135,12 +135,12 @@ const AccountDetails: FC<AccountDetailsProps> = ({
           </div>
           <div id="web3-account-identifier-row" className="flex flex-col justify-center space-y-3">
             {ENSName ? (
-              <div className="bg-dark-800">
+              <div className="bg-primary-bg">
                 {getStatusIcon()}
                 <Typography>{ENSName}</Typography>
               </div>
             ) : (
-              <div className="bg-dark-800 py-2 px-3 rounded">
+              <div className="bg-primary-bg py-2 px-3 rounded">
                 {getStatusIcon()}
                 <Typography>{account && shortenAddress(account)}</Typography>
               </div>
@@ -148,16 +148,16 @@ const AccountDetails: FC<AccountDetailsProps> = ({
             <div className="flex items-center justify-between space-x-3 gap-2">
               {chainId && account && (
                 <ExternalLink
-                  color="light-green"
+                  color="cobalt"
                   startIcon={<LinkIcon size={16} />}
                   href={chainId && getExplorerLink(chainId, ENSName || account, 'address')}
                 >
-                  <Typography variant="sm">{i18n._(t`View on explorer`)}</Typography>
+                  <Typography className='text-primary-text' variant="sm">{i18n._(t`View on explorer`)}</Typography>
                 </ExternalLink>
               )}
               {account && (
                 <Copy toCopy={account}>
-                  <Typography variant="sm">{i18n._(t`Copy Address`)}</Typography>
+                  <Typography className='text-primary-text' variant="sm">{i18n._(t`Copy Address`)}</Typography>
                 </Copy>
               )}
             </div>

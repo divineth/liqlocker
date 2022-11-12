@@ -6,10 +6,10 @@ export default function Search({
   term,
   search,
   placeholder,
-  className = 'bg-dark-700',
+  className = 'bg-primary-bg',
   inputProps = {
     className:
-      'text-baseline bg-transparent w-full py-3 pl-4 pr-14 rounded w-full bg-transparent focus:outline-none bg-dark-700 rounded',
+      'text-baseline bg-transparent w-full py-3 pl-4 pr-14 rounded w-full bg-transparent focus:outline-none bg-primary-bg rounded',
   },
   ...rest
 }: {

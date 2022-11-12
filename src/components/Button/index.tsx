@@ -19,7 +19,7 @@ const FLEXED = {
   green: 'bg-green bg-opacity-80 flex rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   'light-green': 'bg-yellow bg-opacity-80 flex rounded text-dark-900 hover:bg-opacity-100 disabled:bg-opacity-80',
   gradient:
-    'flex text-high-emphesis transition duration-1000 ease-in-out text-high-emphesis bg-gradient-to-r from-light-purple via-dark-purple to-purple opacity-80 hover:opacity-100 disabled:bg-opacity-80',
+    'flex text-high-emphesis transition duration-1000 ease-in-out text-high-emphesis bg-gradient-r-blue-cobalt-primary-alt-bg from-light-purple via-dark-purple to-purple opacity-80 hover:opacity-100 disabled:bg-opacity-80',
 }
 
 const FILLED = {
@@ -27,11 +27,11 @@ const FILLED = {
   red: 'bg-red bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   blue: 'bg-blue bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   pink: 'bg-gradient-to-r from-pink to-opaque-pink w-full rounded text-high-emphesis opacity-80 hover:opacity-100 disabled:bg-opacity-80',
-  gray: 'border rounded shadow-sm focus:ring-2 focus:ring-offset-2 bg-dark-700 bg-opacity-80 w-full text-primary border-dark-800 hover:bg-opacity-100 focus:ring-offset-dark-700 focus:ring-dark-800 disabled:bg-opacity-80',
+  gray: 'border rounded shadow-sm focus:ring-2 focus:ring-offset-2 border-transparent border-gradient-r-blue-cobalt-primary-alt-bg bg-opacity-80 w-full text-primary hover:bg-opacity-100 focus:ring-offset-dark-700 focus:ring-dark-800 disabled:bg-opacity-80',
   green: 'bg-green bg-opacity-80 w-full rounded text-high-emphesis hover:bg-opacity-100 disabled:bg-opacity-80',
   'light-green': 'bg-yellow bg-opacity-80 w-full rounded text-dark-900 hover:bg-opacity-100 disabled:bg-opacity-80',
   gradient:
-    'w-full transition duration-1000 ease-in-out text-high-emphesis bg-gradient-to-r from-light-purple via-dark-purple to-purple opacity-70 hover:opacity-100 disabled:bg-opacity-80',
+    'w-full transition duration-1000 ease-in-out text-high-emphesis border border-transparent border-gradient-r-silver-cobalt from-light-purple via-dark-purple to-purple opacity-70 hover:opacity-100 disabled:bg-opacity-80',
 }
 
 const OUTLINED = {
@@ -39,12 +39,12 @@ const OUTLINED = {
   red: 'bg-red bg-opacity-20 outline-red rounded text-red hover:bg-opacity-40 disabled:bg-opacity-20',
   blue: 'bg-blue bg-opacity-20 outline-blue rounded text-blue hover:bg-opacity-40 disabled:bg-opacity-20',
   pink: 'bg-pink bg-opacity-20 outline-pink rounded text-pink hover:bg-opacity-40 disabled:bg-opacity-20',
-  gray: 'bg-dark-700 bg-opacity-20 outline-gray rounded text-gray hover:bg-opacity-40 disabled:bg-opacity-20',
+  gray: 'bg-dark-700 border-gradient-r-blue-cobalt-primary-alt-bg border border-transparent outline-gray rounded text-gray hover:bg-opacity-40 disabled:bg-opacity-20',
   green: 'bg-green bg-opacity-20 border border-green rounded text-green hover:bg-opacity-40 disabled:bg-opacity-20',
   'light-green':
     'bg-transparent bg-opacity-20 border border-light-purple rounded text-light-purple hover:bg-opacity-40 disabled:bg-opacity-20',
   gradient:
-    'border border-transparent border-gradient-r-purple-dark-900 opacity-80 hover:opacity-100 disabled:bg-opacity-100 disabled:border-dark-800 disabled:bg-none disabled:bg-dark-700',
+    'border border-transparent border-gradient-r-blue-cobalt-primary-alt-bg opacity-80 hover:opacity-100 disabled:bg-opacity-100 disabled:border-dark-800 disabled:bg-none disabled:bg-dark-700',
 }
 
 const EMPTY = {
@@ -123,7 +123,7 @@ export function ButtonConfirmed({
       />
     )
   } else {
-    return <Button color={disabled ? 'gray' : 'gradient'} size="lg" disabled={disabled} {...rest} />
+    return <Button color={'gradient'} size="lg" disabled={disabled} {...rest} />
   }
 }
 
@@ -138,6 +138,6 @@ export function ButtonError({
   if (error) {
     return <Button disabled={disabled} color="red" size="lg" {...rest} />
   } else {
-    return <Button color={disabled ? 'gray' : 'gradient'} disabled={disabled} size="lg" {...rest} />
+    return <Button color={'gradient'} disabled={disabled} size="lg" {...rest} />
   }
 }

@@ -11,6 +11,7 @@ import { t } from '@lingui/macro'
 import { useActiveWeb3React } from '../../hooks/useActiveWeb3React'
 import { useLingui } from '@lingui/react'
 import LanguageSwitch from '../LanguageSwitch'
+import Telegram from '../../../public/images/socials/telegram.svg'
 
 function AppBar(): JSX.Element {
   const { i18n } = useLingui()
@@ -38,30 +39,56 @@ function AppBar(): JSX.Element {
                   </div>
                 </div>
 
-                <div className="fixed bottom-0 left-0 z-10 flex flex-row items-center justify-center w-full p-4 lg:w-auto bg-dark-1000 lg:relative lg:p-0 lg:bg-transparent">
+                <div className="flex flex-row items-center justify-center w-full p-4 w-auto lg:p-0 bg-transparent hidden sm:block">
                   <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
-                    {chainId && [ChainId.MOONRIVER].includes(chainId) && (
+                    {/* {chainId && [ChainId.MOONRIVER].includes(chainId) && (
                       <div className="w-auto flex items-center rounded mr-1 bg-dark-800 shadow-sm text-primary text-xs hover:bg-dark-700 whitespace-nowrap text-xs font-bold cursor-pointer select-none pointer-events-auto hidden sm:block">
                       </div>
                     )}
                     {chainId && [ChainId.MOONRIVER].includes(chainId) && (
                       <div className="w-auto flex items-center rounded mr-1 bg-dark-800 shadow-sm text-primary text-xs hover:bg-dark-700 whitespace-nowrap text-xs font-bold cursor-pointer select-none pointer-events-auto">
                       </div>
-                    )}
-                    <div className="w-auto flex items-center rounded bg-transparent shadow-sm text-primary text-xs hover:bg-dark-900 whitespace-nowrap text-xs font-bold cursor-pointer select-none pointer-events-auto">
+                    )} */}
+                    <div className="w-auto flex items-center rounded bg-transparent shadow-sm text-primary text-xs whitespace-nowrap text-xs font-bold cursor-pointer select-none pointer-events-auto">
                       <Web3Status />
+                      <div className='flex items-center gap-4'>
+                        <a href="#">
+                          <Image src="/images/socials/telegram.svg" width={32} height={32} />
+                        </a>
+                        <a href="#">
+                          <Image src="/images/socials/twitter.svg" width={32} height={32} />
+                        </a>
+                        <a href="#">
+                          <Image src="/images/socials/medium.svg" width={32} height={32} />
+                        </a>
+                      </div>
                     </div>
-                    <div className="hidden md:block">
-                      <LanguageSwitch />
-                    </div>
-                    <More />
                   </div>
                 </div>
+
+                {/* Navbar for smallest menu */}
                 <div className="flex flex-1 -mr-2 sm:hidden">
                   <div className="flex-1">
-                    <Image src="/icon.png" alt="Solarbeam" height="40px" width="40px" className="sm:hidden" />
+                    <Image src="/logo.png" alt="Solarbeam" height="40px" width="40px" className="sm:hidden" />
                   </div>
-                  <LanguageSwitch />
+
+                  <div className="flex flex-row items-center justify-center w-full w-auto lg:p-0 bg-transparent">
+                    <div className="flex items-center justify-between w-full space-x-2 sm:justify-end">
+                      {/* {chainId && [ChainId.MOONRIVER].includes(chainId) && (
+                      <div className="w-auto flex items-center rounded mr-1 bg-dark-800 shadow-sm text-primary text-xs hover:bg-dark-700 whitespace-nowrap text-xs font-bold cursor-pointer select-none pointer-events-auto hidden sm:block">
+                      </div>
+                    )}
+                    {chainId && [ChainId.MOONRIVER].includes(chainId) && (
+                      <div className="w-auto flex items-center rounded mr-1 bg-dark-800 shadow-sm text-primary text-xs hover:bg-dark-700 whitespace-nowrap text-xs font-bold cursor-pointer select-none pointer-events-auto">
+                      </div>
+                    )} */}
+                      <div className="w-auto flex items-center rounded bg-transparent shadow-sm text-primary text-xs whitespace-nowrap text-xs font-bold cursor-pointer select-none pointer-events-auto">
+                        <Web3Status />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Hamburger Icon */}
                   <Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-primary hover:text-high-emphesis focus:outline-none">
                     <span className="sr-only">{i18n._(t`Open main menu`)}</span>
                     {open ? (
@@ -96,6 +123,7 @@ function AppBar(): JSX.Element {
               </div>
             </div>
 
+            {/* Popover for smallest display */}
             <Popover.Panel className="sm:hidden header-border-b">
               <div className="flex flex-col px-4 pt-2 pb-3 space-y-1">
                 <Link href={'/locker'}>

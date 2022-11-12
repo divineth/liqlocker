@@ -123,7 +123,7 @@ export default function CreateLocker(): JSX.Element {
   return (
     <>
       <Head>
-        <title>Locker | Solarbeam</title>
+        <title>Locker</title>
         <meta key="description" name="description" content="Solarbeam Locker" />
       </Head>
 
@@ -141,87 +141,45 @@ export default function CreateLocker(): JSX.Element {
               <NavLink
                 exact
                 href={'/locker'}
-                activeClassName="font-bold bg-transparent border rounded md:rounded-l md:rounded-none text-high-emphesis border-transparent border-gradient-r-yellow-dark-900"
+                activeClassName="font-bold bg-transparent border rounded md:rounded-l md:rounded-none text-high-emphesis border-transparent border-gradient-r-silver-cobalt"
               >
-                <div className="flex items-center gap-2 justify-start md:justify-center px-16 py-4 text-base font-bold border border-transparent border-gradient-r-yellow-dark-900 rounded md:rounded-l-3xl md:rounded-none cursor-pointer">
-                  {router.asPath == '/locker' && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-6 h-6 order-last md:order-first"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  )}
+                <div className="flex items-center gap-2 justify-start md:justify-center px-16 py-4 text-base font-bold border border-transparent border-gradient-r-silver-primary-alt-bg rounded md:rounded-l-3xl md:rounded-none cursor-pointer">
                   <a>{i18n._(t`Search lockers`)}</a>
                 </div>
               </NavLink>
               <NavLink
                 exact
                 href={'/locker/create'}
-                activeClassName="font-bold bg-transparent border md:border-l-0 md:border-r-0 rounded md:rounded-none text-high-emphesis border-transparent border-gradient-r-yellow-dark-900"
+                activeClassName="font-bold bg-transparent border md:border-l-0 md:border-r-0 rounded md:rounded-none text-high-emphesis border-transparent border-gradient-r-silver-cobalt"
               >
-                <div className="flex items-center gap-2 justify-start md:justify-center px-16 py-4 text-base font-bold border md:border-l-0 md:border-r-0 rounded md:rounded-none border-transparent border-gradient-r-yellow-dark-900 cursor-pointer">
-                  {router.asPath == '/locker/create' && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-6 h-6 order-last md:order-first"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  )}
+                <div className="flex items-center gap-2 justify-start md:justify-center px-16 py-4 text-base font-bold border md:border-l-0 md:border-r-0 rounded md:rounded-none border-transparent border-gradient-r-silver-primary-alt-bg cursor-pointer">
                   <a>{i18n._(t`Create lock`)}</a>
                 </div>
               </NavLink>
               <NavLink
                 exact
                 href={'/locker/help'}
-                activeClassName="font-bold bg-transparent border rounded md:rounded-r md:rounded-none text-high-emphesis border-transparent border-gradient-r-yellow-dark-900"
+                activeClassName="font-bold bg-transparent border rounded md:rounded-r md:rounded-none text-high-emphesis border-transparent border-gradient-r-silver-cobalt"
               >
-                <div className="flex items-center gap-2 justify-start md:justify-center px-16 py-4 text-base font-bold border border-transparent rounded md:rounded-r-3xl md:rounded-none border-gradient-r-yellow-dark-900 cursor-pointer">
-                  {router.asPath == '/locker/help' && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                      className="w-6 h-6 order-last md:order-first"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M19.916 4.626a.75.75 0 01.208 1.04l-9 13.5a.75.75 0 01-1.154.114l-6-6a.75.75 0 011.06-1.06l5.353 5.353 8.493-12.739a.75.75 0 011.04-.208z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  )}
+                <div className="flex items-center gap-2 justify-start md:justify-center px-16 py-4 text-base font-bold border border-transparent rounded md:rounded-r-3xl md:rounded-none border-gradient-r-silver-primary-alt-bg cursor-pointer">
                   <a>{i18n._(t`User Guide`)}</a>
                 </div>
               </NavLink>
             </div>
             <div className={`col-span-12 justify-center flex w-full`} style={{ minHeight: '30rem' }}>
-              <Card className="h-full bg-dark-900 z-4 w-full lg:w-9/12">
+              <Card className="h-full border border-transparent border-gradient-r-blue-cobalt-primary-alt-bg z-4 w-full lg:w-9/12">
                 <div className={`grid grid-cols-12 gap-4`}>
-                  <div className={`col-span-12 bg-dark-800 px-6 py-4 rounded`}>
-                    <div className={'px-4 py-2 rounded bg-dark-800'}>
+                  <div className={`col-span-12 bg-section-bg px-6 py-4 rounded`}>
+                    <div className={'px-4 py-2 rounded bg-section-bg'}>
                       <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
                         <div className={classNames('w-full flex sm:w-72 justify-center')}>
                           <div className="flex flex-1 flex-col items-start mt-2 md:mt-0 md:items-end justify-center mx-3.5">
-                            <div className="text-base font-medium text-secondary whitespace-nowrap">Token Address</div>
+                            <div className="text-base font-medium text-primary-text whitespace-nowrap">Token Address</div>
                           </div>
                         </div>
-                        <div className={'flex items-center w-full space-x-3 rounded bg-dark-900 focus:bg-dark-700 p-3'}>
+                        <div className={'flex items-center w-full space-x-3 rounded bg-primary-bg focus:bg-dark-700 p-3'}>
                           <input
-                            className="p-3 w-full flex overflow-ellipsis font-bold recipient-address-input bg-dark-900 h-full w-full rounded placeholder-low-emphesis"
+                            className="p-3 w-full flex overflow-ellipsis font-bold recipient-address-input bg-primary-bg h-full w-full rounded placeholder-low-emphesis"
                             type="text"
                             autoComplete="off"
                             autoCorrect="off"
@@ -234,14 +192,14 @@ export default function CreateLocker(): JSX.Element {
                         </div>
                       </div>
                     </div>
-                    <div className={'px-4 py-2 rounded bg-dark-800'}>
+                    <div className={'px-4 py-2 rounded bg-section-bg'}>
                       <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
                         <div className={classNames('w-full flex sm:w-72 justify-center')}>
                           <div className="flex flex-1 flex-col items-start mt-2 md:mt-0 md:items-end justify-center mx-3.5">
-                            <div className="text-base font-medium text-secondary whitespace-nowrap">Amount</div>
+                            <div className="text-base font-medium text-primary-text whitespace-nowrap">Amount</div>
                           </div>
                         </div>
-                        <div className={'flex items-center w-full space-x-3 rounded bg-dark-900 focus:bg-dark-700 p-3'}>
+                        <div className={'flex items-center w-full space-x-3 rounded bg-primary-bg focus:bg-dark-700 p-3'}>
                           <NumericalInput
                             className={'p-3 text-base bg-transparent'}
                             id="token-amount-input"
@@ -263,17 +221,17 @@ export default function CreateLocker(): JSX.Element {
                         </div>
                       </div>
                     </div>
-                    <div className={'px-4 py-2 rounded bg-dark-800'}>
+                    <div className={'px-4 py-2 rounded bg-section-bg'}>
                       <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
                         <div className={classNames('w-full flex sm:w-72 justify-center')}>
                           <div className="flex flex-1 flex-col items-start mt-2 md:mt-0 md:items-end justify-center mx-3.5">
-                            <div className="text-base font-medium text-secondary whitespace-nowrap">Withdrawer</div>
+                            <div className="text-base font-medium text-primary-text whitespace-nowrap">Withdrawer</div>
                           </div>
                         </div>
-                        <div className={'flex items-center w-full space-x-3 rounded bg-dark-900 focus:bg-dark-700 p-3'}>
+                        <div className={'flex items-center w-full space-x-3 rounded bg-primary-bg focus:bg-dark-700 p-3'}>
                           <>
                             <input
-                              className="p-3 w-full flex overflow-ellipsis font-bold recipient-address-input bg-dark-900 h-full w-full rounded placeholder-low-emphesis"
+                              className="p-3 w-full flex overflow-ellipsis font-bold recipient-address-input bg-primary-bg h-full w-full rounded placeholder-low-emphesis"
                               type="text"
                               autoComplete="off"
                               autoCorrect="off"
@@ -287,7 +245,7 @@ export default function CreateLocker(): JSX.Element {
                               <Button
                                 onClick={() => setWithdrawer(account)}
                                 size="xs"
-                                className="text-xxs font-medium bg-transparent border rounded-full hover:bg-primary border-low-emphesis text-secondary whitespace-nowrap"
+                                className="text-xxs font-medium bg-transparent border rounded-full hover:bg-primary-text text-white whitespace-nowrap"
                               >
                                 {i18n._(t`Me`)}
                               </Button>
@@ -296,14 +254,14 @@ export default function CreateLocker(): JSX.Element {
                         </div>
                       </div>
                     </div>
-                    <div className={'px-4 py-2 rounded bg-dark-800'}>
+                    <div className={'px-4 py-2 rounded bg-section-bg'}>
                       <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:flex-row">
                         <div className={classNames('w-full flex sm:w-72 justify-center')}>
                           <div className="flex flex-1 flex-col items-start mt-2 md:mt-0 md:items-end justify-center mx-3.5">
-                            <div className="text-base font-medium text-secondary whitespace-nowrap">Unlock date</div>
+                            <div className="text-base font-medium text-primary-text whitespace-nowrap">Unlock date</div>
                           </div>
                         </div>
-                        <div className={'flex items-center w-full space-x-3 rounded bg-dark-900 focus:bg-dark-700 p-3'}>
+                        <div className={'flex items-center w-full space-x-3 rounded bg-primary-bg focus:bg-dark-700 p-3'}>
                           <>
                             <Datetime
                               value={unlockDate}
@@ -313,7 +271,7 @@ export default function CreateLocker(): JSX.Element {
                               onChange={(e) => setUnlockDate(moment.default(e))}
                               inputProps={{
                                 className:
-                                  'p-3 w-full flex overflow-ellipsis font-bold recipient-address-input bg-dark-900 h-full w-full rounded placeholder-low-emphesis',
+                                  'p-3 w-full flex overflow-ellipsis font-bold recipient-address-input bg-primary-bg h-full w-full rounded placeholder-low-emphesis',
                               }}
                             />
                           </>
@@ -328,7 +286,7 @@ export default function CreateLocker(): JSX.Element {
                         </div>
                         <div className={'flex items-center w-full'}>
                           {!account ? (
-                            <Web3Connect size="lg" color="gradient" className="w-full" />
+                            <Web3Connect size="lg" color="gray" className="w-full" />
                           ) : !allInfoSubmitted ? (
                             <ButtonError className="font-bold" style={{ width: '100%' }} disabled={!allInfoSubmitted}>
                               {errorMessage}

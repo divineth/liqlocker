@@ -140,8 +140,8 @@ export default function Modal({
                 maxWidth={maxWidth}
                 mobile={isMobile}
               >
-                <div className="w-full p-px rounded bg-gradient-to-r from-light-purple via-dark-purple to-purple">
-                  <div className={`flex flex-col h-full w-full bg-dark-700 rounded p-6 overflow-y-auto`}>
+                <div className="w-full p-px rounded border border-transparent border-gradient-r-blue-cobalt-primary-alt-bg">
+                  <div className={`flex flex-col h-full w-full bg-section-bg rounded p-6 overflow-y-auto`}>
                     {/* prevents the automatic focusing of inputs on mobile by the reach dialog */}
                     {!initialFocusRef && isMobile ? <div tabIndex={1} /> : null}
                     {children}

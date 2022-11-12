@@ -46,12 +46,17 @@ module.exports = {
           'pink-red-light-brown': ['#FE5A75', '#FEC464'],
           yellow: ['#7b6532', '#7b6532'],
           purple: ['#8800ec', '#ffc000'],
+          'silver': ['#E8E6E3', '#E8E6E3'],
+          'blue-cobalt': ['#0C6FB1', '#000952'],
         },
         background: {
           'dark-1000': '#000',
           'dark-900': '#111',
           'dark-800': '#1d1d1d',
           'dark-pink-red': '#4e3034',
+          'primary-bg': '#000414',
+          'primary-alt-bg': "#020A23",
+          'cobalt': '#0c6fb1',
         },
         border: {
           1: '1px',
@@ -95,6 +100,10 @@ module.exports = {
         secondary: '#575757',
         'high-emphesis': '#E3E3E3',
         light: '#FAFAFA',
+        'primary-bg': '#000414',
+        'section-bg': '#020A23',
+        'primary-text': '#0C6FB1',
+        'secondary-silver': '#E8E6E3'
       },
       lineHeight: {
         '48px': '48px',
@@ -170,6 +179,10 @@ module.exports = {
             'linear-gradient(to right, rgba(255, 209, 101, 0.5) 0%, rgba(255, 209, 101, 0.5) 100%) left bottom no-repeat',
           backgroundSize: '100% 2px',
         },
+        '.section-gradient-border': {
+          background: 'linear-gradient(0deg, rgba(12, 111, 177, 1) 0%, rgba(0, 9, 82, 1) 100%)',
+          backgroundSize: '100% 2px',
+        }
       })
     }),
   ],

@@ -24,7 +24,7 @@ export default function Card({
       className={`relative ${className}`}
       style={{
         borderRadius: '10px',
-        backgroundImage: `url(${backgroundImage})`,
+        // backgroundImage: `url(${backgroundImage})`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'contain',
         backgroundPosition: 'center bottom',
