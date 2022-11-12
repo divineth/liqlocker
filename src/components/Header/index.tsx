@@ -49,7 +49,7 @@ function AppBar(): JSX.Element {
                       <div className="w-auto flex items-center rounded mr-1 bg-dark-800 shadow-sm text-primary text-xs hover:bg-dark-700 whitespace-nowrap text-xs font-bold cursor-pointer select-none pointer-events-auto">
                       </div>
                     )} */}
-                    <div className="w-auto flex items-center rounded bg-transparent shadow-sm text-primary text-xs whitespace-nowrap text-xs font-bold cursor-pointer select-none pointer-events-auto">
+                    <div className="w-auto flex items-center rounded bg-transparent shadow-sm text-primary text-xs whitespace-nowrap text-xs font-bold cursor-pointer select-none pointer-events-auto gap-4">
                       <Web3Status />
                       <div className='flex items-center gap-4'>
                         <a href="#">
