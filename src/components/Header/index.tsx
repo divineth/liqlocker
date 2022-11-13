@@ -26,15 +26,8 @@ function AppBar(): JSX.Element {
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
                   <div className="hidden sm:block sm:ml-4">
-                    <div className="flex space-x-2">
-                      <NavLink href={'/locker'}>
-                        <a
-                          id={`farm-nav-link`}
-                          className="p-2 text-base text-primary hover:text-high-emphesis focus:text-high-emphesis whitespace-nowrap"
-                        >
-                          {i18n._(t`Locker`)}
-                        </a>
-                      </NavLink>
+                    <div className="flex-1">
+                      <Image src="/locker-logo.png" alt="Solarbeam" height="70px" width="200px" className="sm:hidden" />
                     </div>
                   </div>
                 </div>
@@ -51,7 +44,7 @@ function AppBar(): JSX.Element {
                     )} */}
                     <div className="w-auto flex items-center rounded bg-transparent shadow-sm text-primary text-xs whitespace-nowrap text-xs font-bold cursor-pointer select-none pointer-events-auto gap-4">
                       <Web3Status />
-                      <div className='flex items-center gap-4'>
+                      <div className="flex items-center gap-4">
                         <a href="#">
                           <Image src="/images/socials/telegram.svg" width={32} height={32} />
                         </a>
@@ -69,7 +62,7 @@ function AppBar(): JSX.Element {
                 {/* Navbar for smallest menu */}
                 <div className="flex flex-1 -mr-2 sm:hidden">
                   <div className="flex-1">
-                    <Image src="/logo.png" alt="Solarbeam" height="40px" width="40px" className="sm:hidden" />
+                    <Image src="/locker-logo.png" alt="Solarbeam" height="70px" width="200px" className="sm:hidden" />
                   </div>
 
                   <div className="flex flex-row items-center justify-center w-full w-auto lg:p-0 bg-transparent">
