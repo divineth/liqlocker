@@ -78,7 +78,7 @@ export const injected = new InjectedConnector({
 
 export const bridgeInjected = new InjectedConnector({
   supportedChainIds: [
-    1, // mainnet
+    // 1, // mainnet
     // 3, // ropsten
     // 4, // rinkeby
     // 5, // goreli
@@ -88,7 +88,7 @@ export const bridgeInjected = new InjectedConnector({
     // 137, // matic
     // 80001, // matic testnet
     // 100, // xdai
-    56, // binance smart chain
+    // 56, // binance smart chain
     // 97, // binance smart chain testnet
     // 1287, // moonbase
     // 1285, // moonriver
@@ -107,7 +107,7 @@ export const bridgeInjected = new InjectedConnector({
 
 // mainnet only
 export const walletconnect = new WalletConnectConnector({
-  rpc: { [ChainId.ARBITRUM]: RPC[ChainId.ARBITRUM] },
+  rpc: { [ChainId.MAINNET]: RPC[ChainId.MAINNET] },
   bridge: 'https://bridge.walletconnect.org',
   qrcode: true,
   pollingInterval: 15000,
@@ -127,7 +127,7 @@ export const portis = new PortisConnector({
 
 // mainnet only
 export const walletlink = new WalletLinkConnector({
-  url: RPC[ChainId.ARBITRUM],
+  url: RPC[ChainId.MAINNET],
   appName: 'SushiSwap',
   appLogoUrl: 'https://raw.githubusercontent.com/sushiswap/art/master/sushi/logo-256x256.png',
 })

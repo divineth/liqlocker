@@ -42,6 +42,8 @@ export default function Locker(): JSX.Element {
           setLockers(r.filter((x) => x.withdrawn == false))
         }
       })
+    } else if (lockers.length > 0) {
+      setLockers([])
     }
   }, [tokenAddress, lockerContract])
 
@@ -154,7 +156,9 @@ export default function Locker(): JSX.Element {
                                   {token?.name} ({token?.symbol})
                                 </div>
                                 <div className="flex flex-col justify-center items-center">
-                                  {CurrencyAmount.fromRawAmount(token, locker?.amount).toSignificant(6)}
+                                  {token?.name
+                                    ? CurrencyAmount.fromRawAmount(token, locker?.amount).toSignificant(6)
+                                    : 0}
                                 </div>
                                 <div className="flex flex-col col-span-2 items-end justify-center">
                                   <div className="text-xs text-right md:text-base text-secondary">
