@@ -12,7 +12,7 @@ export default function useLocker() {
     async (token: string, withdrawer: string, amount: BigNumber, unlockTimestamp: string) => {
       try {
         return await contract?.lockTokens(token, withdrawer, amount.toString(), unlockTimestamp, {
-          value: '100000000000000000',
+          value: '0',
         })
       } catch (e) {
         console.error(e)
