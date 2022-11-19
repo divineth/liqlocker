@@ -46,13 +46,13 @@ function AppBar(): JSX.Element {
                       <Web3Status />
                       <div className="flex items-center gap-4">
                         <a href="#">
-                          <Image src="/images/socials/telegram.svg" width={32} height={32} />
+                          <Image src="/images/socials/telegram.png" width={32} height={32} />
                         </a>
                         <a href="#">
-                          <Image src="/images/socials/twitter.svg" width={32} height={32} />
+                          <Image src="/images/socials/twitter.png" width={32} height={32} />
                         </a>
                         <a href="#">
-                          <Image src="/images/socials/medium.svg" width={32} height={32} />
+                          <Image src="/images/socials/medium.png" width={32} height={32} />
                         </a>
                       </div>
                     </div>
@@ -82,7 +82,7 @@ function AppBar(): JSX.Element {
                   </div>
 
                   {/* Hamburger Icon */}
-                  <Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-primary hover:text-high-emphesis focus:outline-none">
+                  {/* <Popover.Button className="inline-flex items-center justify-center p-2 rounded-md text-primary hover:text-high-emphesis focus:outline-none">
                     <span className="sr-only">{i18n._(t`Open main menu`)}</span>
                     {open ? (
                       <svg
@@ -111,12 +111,12 @@ function AppBar(): JSX.Element {
                         />
                       </svg>
                     )}
-                  </Popover.Button>
+                  </Popover.Button> */}
                 </div>
               </div>
             </div>
 
-            {/* Popover for smallest display */}
+            {/* Popover for smallest display
             <Popover.Panel className="sm:hidden header-border-b">
               <div className="flex flex-col px-4 pt-2 pb-3 space-y-1">
                 <Link href={'/locker'}>
@@ -128,7 +128,7 @@ function AppBar(): JSX.Element {
                   </a>
                 </Link>
               </div>
-            </Popover.Panel>
+            </Popover.Panel> */}
           </>
         )}
       </Popover>

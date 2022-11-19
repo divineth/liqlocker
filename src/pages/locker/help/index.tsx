@@ -51,7 +51,7 @@ export default function CreateLocker(): JSX.Element {
                 activeClassName="font-bold bg-transparent border md:border-l-0 md:border-r-0 rounded md:rounded-none text-high-emphesis border-transparent border-gradient-r-silver-cobalt"
               >
                 <div className="flex items-center gap-2 justify-start md:justify-center px-16 py-4 text-base font-bold border md:border-l-0 md:border-r-0 rounded md:rounded-none border-transparent border-gradient-r-silver-primary-alt-bg cursor-pointer">
-                  <a>{i18n._(t`Create lock`)}</a>
+                  <a className="text-[#b3b4b5]">{i18n._(t`Create lock`)}</a>
                 </div>
               </NavLink>
               <NavLink

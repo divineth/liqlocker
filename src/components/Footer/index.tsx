@@ -21,13 +21,13 @@ const Footer = () => {
         </div>
         <div className="flex sm:hidden items-center gap-4">
           <a href="#">
-            <Image src="/images/socials/telegram.svg" width={32} height={32} />
+            <Image src="/images/socials/telegram.png" width={32} height={32} />
           </a>
           <a href="#">
-            <Image src="/images/socials/twitter.svg" width={32} height={32} />
+            <Image src="/images/socials/twitter.png" width={32} height={32} />
           </a>
           <a href="#">
-            <Image src="/images/socials/medium.svg" width={32} height={32} />
+            <Image src="/images/socials/medium.png" width={32} height={32} />
           </a>
         </div>
       </div>
