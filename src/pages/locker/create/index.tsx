@@ -27,6 +27,8 @@ import * as moment from 'moment'
 import useLocker from '../../../features/locker/useLocker'
 import { ethers } from 'ethers'
 import { useAddPopup } from '../../../state/application/hooks'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 export default function CreateLocker(): JSX.Element {
   const { i18n } = useLingui()
@@ -35,7 +37,7 @@ export default function CreateLocker(): JSX.Element {
   const [tokenAddress, setTokenAddress] = useState('')
   const [withdrawer, setWithdrawer] = useState('')
   const [value, setValue] = useState('')
-  const [unlockDate, setUnlockDate] = useState(moment.default())
+  const [unlockDate, setUnlockDate] = useState(new Date())
   const [pendingTx, setPendingTx] = useState(false)
   const addTransaction = useTransactionAdder()
 
@@ -65,7 +67,7 @@ export default function CreateLocker(): JSX.Element {
     ? 'Invalid withdrawer'
     : isNaN(parseFloat(value)) || parseFloat(value) == 0
     ? 'Invalid amount'
-    : moment.isDate(unlockDate) || moment.default(unlockDate).isBefore(new Date())
+    : !moment.isDate(unlockDate) || moment.default(unlockDate).isBefore(new Date())
     ? 'Invalid unlock date'
     : ''
 
@@ -102,7 +104,7 @@ export default function CreateLocker(): JSX.Element {
           setTokenAddress('')
           setWithdrawer('')
           setValue('')
-          setUnlockDate(moment.default())
+          setUnlockDate(new Date())
         } else {
           throw 'User denied transaction signature.'
         }
@@ -273,7 +275,7 @@ export default function CreateLocker(): JSX.Element {
                           className={'flex items-center w-full space-x-3 rounded bg-primary-bg focus:bg-dark-700 p-3'}
                         >
                           <>
-                            <Datetime
+                            {/* <Datetime
                               value={unlockDate}
                               utc={true}
                               closeOnSelect={true}
@@ -283,6 +285,18 @@ export default function CreateLocker(): JSX.Element {
                                 className:
                                   'p-3 w-full flex overflow-ellipsis font-bold recipient-address-input bg-primary-bg h-full w-full rounded placeholder-low-emphesis',
                               }}
+                            /> */}
+
+                            <DatePicker
+                              selected={unlockDate}
+                              onChange={(date) => {
+                                setUnlockDate(date)
+                              }}
+                              showPopperArrow={false}
+                              showTimeInput
+                              minDate={new Date()}
+                              dateFormat="MM/dd/yyyy h:mm aa"
+                              className="p-3 w-full flex overflow-ellipsis font-bold recipient-address-input bg-primary-bg h-full w-full rounded placeholder-low-emphesis"
                             />
                           </>
                         </div>

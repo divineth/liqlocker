@@ -34,6 +34,17 @@ export default function useLocker() {
     [contract]
   )
 
+  const extendLock = useCallback(
+   async (id:string, duration) => {
+    try {
+     return await contract?.extendLock(id, duration) 
+    } catch (e) {
+      console.error(e)
+      return e
+    }
+   }
+  , [contract])
+
   const getLockersByTokenAddress = useCallback(
     async (token: string) => {
       try {
@@ -54,5 +65,5 @@ export default function useLocker() {
     [contract, tokenContract]
   )
 
-  return { lockTokens, getLockersByTokenAddress, withdrawTokens }
+  return { lockTokens, getLockersByTokenAddress, withdrawTokens, extendLock }
 }

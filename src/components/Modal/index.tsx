@@ -33,7 +33,7 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, maxWidth, mobile, is
 )).attrs({
   'aria-label': 'dialog',
 })`
-  overflow-y: auto;
+  overflow-y: visible;
 
   &[data-reach-dialog-content] {
     display: flex;
@@ -45,7 +45,7 @@ const StyledDialogContent = styled(({ minHeight, maxHeight, maxWidth, mobile, is
 
     width: 100vw;
     border-radius: 10px;
-    overflow-y: auto;
+    overflow-y: visible;
     overflow-x: hidden;
 
     ${({ maxWidth }) =>
@@ -85,6 +85,7 @@ interface ModalProps {
   padding?: number
   maxWidth?: number
   className?: string
+  overflow_y?: string
 }
 
 export default function Modal({
@@ -96,6 +97,7 @@ export default function Modal({
   children,
   padding = 5,
   maxWidth = 420,
+  overflow_y,
 }: ModalProps) {
   const fadeTransition = useTransition(isOpen, null, {
     config: { duration: 200 },
@@ -131,8 +133,11 @@ export default function Modal({
                       ...bind(),
                       style: {
                         transform: y.interpolate((y) => `translateY(${y > 0 ? y : 0}px)`),
+                        ...(overflow_y && { overflow: 'visible' }),
                       },
                     }
+                  : overflow_y
+                  ? { style: { overflow: 'visible' } }
                   : {})}
                 aria-label="dialog content"
                 minHeight={minHeight}
@@ -141,7 +146,11 @@ export default function Modal({
                 mobile={isMobile}
               >
                 <div className="w-full p-px rounded border border-transparent border-gradient-r-blue-cobalt-primary-alt-bg">
-                  <div className={`flex flex-col h-full w-full bg-section-bg rounded p-6 overflow-y-auto`}>
+                  <div
+                    className={`flex flex-col h-full w-full bg-section-bg rounded p-6 ${
+                      overflow_y ? `overflow-y-${overflow_y}` : `overflow-y-auto`
+                    }`}
+                  >
                     {/* prevents the automatic focusing of inputs on mobile by the reach dialog */}
                     {!initialFocusRef && isMobile ? <div tabIndex={1} /> : null}
                     {children}

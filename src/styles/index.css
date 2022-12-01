@@ -82,6 +82,10 @@ input:focus {
   background-color: #bfbfbf8a;
 } 
 
+.rdt{
+  width: 100%;
+}
+
 .rdtPicker {
   background-color: #000414 !important;
   border: 1px solid #000414 !important;
@@ -90,6 +94,62 @@ input:focus {
   min-width: 280px !important;
 }
 
+.react-datepicker{
+  background-color: #000414 !important;
+  border: 1px solid #000414 !important;
+  border-radius: 5px !important;
+  color: #fff !important;
+  font-family: var(--font-sans) !important;
+  /* margin-top: 6px !important;
+  min-width: 280px !important; */
+}
+
+.react-datepicker__navigation{
+  top: 8px !important;
+}
+
+.react-datepicker__month-container{
+  border-bottom: 1px solid #0C6FB1 !important;
+}
+
+.react-datepicker__header{
+  background-color: #000414 !important;
+  border-bottom: 1px solid #0C6FB1 !important;
+}
+
+.react-datepicker__current-month, .react-datepicker-time__header, .react-datepicker-year-header{
+  color: #fff !important;
+}
+
+.react-datepicker__day-name, .react-datepicker__day, .react-datepicker__time-name{
+  color: #fff !important;
+}
+
+.react-datepicker__input-time-container{
+  float: none !important;
+  display: flex;
+  margin: 0 !important;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  justify-content: center;
+}
+
+.react-datepicker__input-time-container .react-datepicker-time__input-container .react-datepicker-time__input input[type="time"]{
+  background-color: #000414;
+}
+
+
+.react-datepicker__day:hover, .react-datepicker__month-text:hover, .react-datepicker__quarter-text:hover, .react-datepicker__year-text:hover{
+  background-color: #0C6FB1 !important;
+
+}
+.react-datepicker__day--disabled:hover, .react-datepicker__month-text--disabled:hover, .react-datepicker__quarter-text--disabled:hover, .react-datepicker__year-text--disabled:hover{
+  cursor: not-allowed;
+  background-color: transparent !important;
+}
+.react-datepicker__day--disabled, .react-datepicker__month-text--disabled, .react-datepicker__quarter-text--disabled, .react-datepicker__year-text--disabled, .react-datepicker__day--outside-month{
+  color: #999999 !important;
+}
 .rdtPicker td.rdtActive, .rdtPicker td.rdtActive:hover{
   background-color: transparent !important;
   color: #0C6FB1 !important;

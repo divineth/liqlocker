@@ -14,12 +14,14 @@ import SolarbeamLogo from '../../components/SolarbeamLogo'
 import { useTransactionAdder } from '../../state/transactions/hooks'
 import useLocker from '../../features/locker/useLocker'
 import { Disclosure } from '@headlessui/react'
-import moment from 'moment'
+import * as moment from 'moment'
 import { useToken } from '../../hooks/Tokens'
 import { CurrencyAmount } from '../../sdk'
 import Button from '../../components/Button'
 import { getAddress } from '@ethersproject/address'
 import { useRouter } from 'next/router'
+import ExtendLockModal from '../../modals/ExtendLockModal'
+
 
 export default function Locker(): JSX.Element {
   const { i18n } = useLingui()
@@ -27,6 +29,10 @@ export default function Locker(): JSX.Element {
   const [tokenAddress, setTokenAddress] = useState(undefined)
   const token = useToken(isAddress(tokenAddress) ? tokenAddress : undefined)
   const [pendingTx, setPendingTx] = useState(false)
+  const [chosenLockDate, setChosenLockDate] = useState()
+  const [chosenLockID, setChosenLockID] = useState()
+
+  const [isExtendModalOpen, setIsExtendModalOpen] = useState(false)
   const addTransaction = useTransactionAdder()
 
   const [lockers, setLockers] = useState([])
@@ -64,6 +70,35 @@ export default function Locker(): JSX.Element {
     [addTransaction, i18n, lockerContract]
   )
 
+  const handleExtend = useCallback(
+    async (id, duration) => {
+      setPendingTx(true)
+
+      try {
+        const tx = await lockerContract.extendLock(id, moment.default(duration).unix().toString())
+        addTransaction(tx, {
+          summary: `Extend locker for ${id}`,
+        })
+      } catch (error) {
+        console.error(error)
+      }
+      setPendingTx(false)
+    },
+    [addTransaction, lockerContract]
+  )
+
+  const showModal = (lockId, unlockDate) => {
+    setChosenLockID(lockId)
+    setChosenLockDate(unlockDate)
+    setIsExtendModalOpen(true)
+  }
+
+  const dismissModal = () => {
+    setIsExtendModalOpen(false)
+    setChosenLockDate(undefined)
+    setChosenLockID(undefined)
+  }
+
   return (
     <>
       <Head>
@@ -97,7 +132,7 @@ export default function Locker(): JSX.Element {
                 activeClassName="font-bold bg-transparent border md:border-l-0 md:border-r-0 rounded md:rounded-none text-high-emphesis border-transparent border-gradient-r-silver-cobalt"
               >
                 <div className="flex items-center gap-2 justify-start md:justify-center px-16 py-4 text-base font-bold border md:border-l-0 md:border-r-0 rounded md:rounded-none border-transparent border-gradient-r-silver-primary-alt-bg cursor-pointer">
-                  <a className='text-[#b3b4b5]'>{i18n._(t`Create lock`)}</a>
+                  <a className="text-[#b3b4b5]">{i18n._(t`Create lock`)}</a>
                 </div>
               </NavLink>
               <NavLink
@@ -178,6 +213,20 @@ export default function Locker(): JSX.Element {
                                       Withdraw
                                     </Button>
                                   </div>
+                                  <div className="text-xs text-right md:text-base text-secondary">
+                                    <Button
+                                      variant="link"
+                                      style={{ width: '100%', paddingLeft: '0', paddingRight: '0' }}
+                                      onClick={() => showModal(locker?.id, locker?.unlockTimestamp.toString())}
+                                      disabled={
+                                        moment.unix(locker?.unlockTimestamp.toString()).isAfter(new Date()) ||
+                                        !account ||
+                                        (account && getAddress(account) != getAddress(locker?.withdrawer))
+                                      }
+                                    >
+                                      Extend Lock
+                                    </Button>
+                                  </div>
                                 </div>
                               </div>
                             </Disclosure.Button>
@@ -191,6 +240,14 @@ export default function Locker(): JSX.Element {
             </div>
           </div>
         </DoubleGlowShadow>
+        <ExtendLockModal
+          isOpen={isExtendModalOpen}
+          onDismiss={dismissModal}
+          title={'Extend Lock'}
+          lockId={chosenLockID}
+          currentDate={chosenLockDate}
+          extend={handleExtend}
+        />
       </div>
     </>
   )
