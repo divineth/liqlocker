@@ -21,7 +21,8 @@ import Button from '../../components/Button'
 import { getAddress } from '@ethersproject/address'
 import { useRouter } from 'next/router'
 import ExtendLockModal from '../../modals/ExtendLockModal'
-
+import ProgressBar from '../../components/ProgressBar'
+import { utils } from 'ethers'
 
 export default function Locker(): JSX.Element {
   const { i18n } = useLingui()
@@ -42,6 +43,7 @@ export default function Locker(): JSX.Element {
   const router = useRouter()
 
   useEffect(() => {
+    console.log('running again')
     if (isAddress(tokenAddress)) {
       lockerContract.getLockersByTokenAddress(tokenAddress).then((r) => {
         if (r.length > 0) {
@@ -51,7 +53,7 @@ export default function Locker(): JSX.Element {
     } else if (lockers.length > 0) {
       setLockers([])
     }
-  }, [tokenAddress, lockerContract])
+  }, [tokenAddress])
 
   const handleWithdraw = useCallback(
     async (id) => {
@@ -97,6 +99,14 @@ export default function Locker(): JSX.Element {
     setIsExtendModalOpen(false)
     setChosenLockDate(undefined)
     setChosenLockID(undefined)
+  }
+
+  const toggleScore = (locker) => {
+    if (locker.scoreVisible) {
+      locker.scoreVisible = false
+    } else {
+      locker.scoreVisible = true
+    }
   }
 
   return (
@@ -187,8 +197,25 @@ export default function Locker(): JSX.Element {
                               )}
                             >
                               <div className="grid grid-cols-5">
-                                <div className="flex col-span-2 items-center">
+                                <div className="flex flex-col col-span-2 items-start justify-center">
                                   {token?.name} ({token?.symbol})
+                                  <div className="text-xs text-right md:text-base text-secondary">
+                                    <Button
+                                      variant="link"
+                                      style={{ width: '100%', paddingLeft: '0', paddingRight: '0' }}
+                                      onClick={() => toggleScore(locker)}
+                                    >
+                                      {!locker?.scoreVisible ? 'View Score' : 'Hide Score'}
+                                    </Button>
+                                  </div>
+                                  {locker?.scoreVisible && (
+                                    <div className="flex flex-col text-xs text-left md:text-base text-white">
+                                      {locker?.scoreValue <= 0
+                                        ? 'Lock does not meet our requirements'
+                                        : `Health Score ${utils.formatUnits(locker?.scoreValue, 2)}%:`}
+                                      <ProgressBar width={150} percent={locker?.scoreValue / 10000} />
+                                    </div>
+                                  )}
                                 </div>
                                 <div className="flex flex-col justify-center items-center">
                                   {token?.name

@@ -35,15 +35,16 @@ export default function useLocker() {
   )
 
   const extendLock = useCallback(
-   async (id:string, duration) => {
-    try {
-     return await contract?.extendLock(id, duration) 
-    } catch (e) {
-      console.error(e)
-      return e
-    }
-   }
-  , [contract])
+    async (id: string, duration) => {
+      try {
+        return await contract?.extendLock(id, duration)
+      } catch (e) {
+        console.error(e)
+        return e
+      }
+    },
+    [contract]
+  )
 
   const getLockersByTokenAddress = useCallback(
     async (token: string) => {
@@ -53,7 +54,9 @@ export default function useLocker() {
         if (lockersIds.length > 0) {
           for (const id of lockersIds) {
             const lockerInfo = await contract?.lockedToken(id.toString())
-            result.push({ id, ...lockerInfo })
+            const scoreVisible = false
+            const scoreValue = lockerInfo ? await contract?.getScore(lockerInfo?.token) : 0;
+            result.push({ id, scoreVisible, scoreValue, ...lockerInfo })
           }
         }
         return result
