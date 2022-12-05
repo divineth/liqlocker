@@ -1,4 +1,4 @@
-import { useLockerContract, useTokenContract } from '../../hooks'
+import { useLockerContract, useTokenContract, useScorerContract } from '../../hooks'
 import { BigNumber } from '@ethersproject/bignumber'
 import { Zero } from '@ethersproject/constants'
 import { useCallback } from 'react'
@@ -6,6 +6,7 @@ import { useToken } from '../../hooks/Tokens'
 
 export default function useLocker() {
   const contract = useLockerContract()
+  const scorerContract = useScorerContract()
   const tokenContract = useTokenContract()
 
   const lockTokens = useCallback(
@@ -55,7 +56,7 @@ export default function useLocker() {
           for (const id of lockersIds) {
             const lockerInfo = await contract?.lockedToken(id.toString())
             const scoreVisible = false
-            const scoreValue = lockerInfo ? await contract?.getScore(lockerInfo?.token) : 0;
+            const scoreValue = lockerInfo ? await scorerContract?.getScore(lockerInfo?.token) : 0;
             result.push({ id, scoreVisible, scoreValue, ...lockerInfo })
           }
         }

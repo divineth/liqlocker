@@ -2,6 +2,7 @@ import {
   ARCHER_ROUTER_ADDRESS,
   BNB_USD_PAIR,
   LOCKER_ADDRESS,
+  SCORER_ADDRESS,
   MINICHEF_ADDRESS,
   MOVR_USDC_PAIR,
   MULTICALL2_ADDRESS,
@@ -199,6 +200,11 @@ export function useSolarVaultContract(withSignerIfPossible?: boolean): Contract 
 export function useLockerContract(withSignerIfPossible?: boolean): Contract | null {
   const { chainId } = useActiveWeb3React()
   return useContract(chainId && LOCKER_ADDRESS[chainId], SOLAR_LOCKER_ABI, withSignerIfPossible)
+}
+
+export function useScorerContract(withSignerIfPossible?: boolean): Contract | null {
+  const { chainId } = useActiveWeb3React()
+  return useContract(chainId && SCORER_ADDRESS[chainId], SOLAR_LOCKER_ABI, withSignerIfPossible)
 }
 
 export function useSolarMovrContract(withSignerIfPossible?: boolean): Contract | null {
