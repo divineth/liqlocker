@@ -24,11 +24,11 @@ const ProgressBar = ({ width, percent }) => {
   })
   return (
     <div>
-      <div className={style.progressDiv} style={{ width: width, opacity: bgOpacity }}>
+      <div className={style.progressDiv} style={{ width: `${width}%`, opacity: bgOpacity }}>
         <div
           className={style.progress}
           style={{
-            width: `${value}px`,
+            width: `${percent * 100}%`,
             background: pillColor,
           }}
         ></div>

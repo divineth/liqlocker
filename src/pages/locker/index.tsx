@@ -198,22 +198,25 @@ export default function Locker(): JSX.Element {
                             >
                               <div className="grid grid-cols-5">
                                 <div className="flex flex-col col-span-2 items-start justify-center">
-                                  {token?.name} ({token?.symbol})
-                                  <div className="text-xs text-right md:text-base text-secondary">
-                                    <Button
-                                      variant="link"
-                                      style={{ width: '100%', paddingLeft: '0', paddingRight: '0' }}
-                                      onClick={() => toggleScore(locker)}
-                                    >
-                                      {!locker?.scoreVisible ? 'View Score' : 'Hide Score'}
-                                    </Button>
+                                  <div className='flex flex-col sm:flex-row gap-2 items-start'>
+                                    {token?.name} ({token?.symbol})
+                                    <div className="text-xs text-right md:text-base text-secondary">
+                                      <Button
+                                        variant="link"
+                                        style={{ width: '100%',padding: '0' }}
+                                        onClick={() => toggleScore(locker)}
+                                      >
+                                        {!locker?.scoreVisible ? '+' : '-'}
+                                      </Button>
+                                    </div>
                                   </div>
+
                                   {locker?.scoreVisible && (
                                     <div className="flex flex-col text-xs text-left md:text-base text-white">
                                       {locker?.scoreValue <= 0
                                         ? 'Lock does not meet our requirements'
                                         : `Health Score ${utils.formatUnits(locker?.scoreValue, 2)}%:`}
-                                      <ProgressBar width={150} percent={locker?.scoreValue / 10000} />
+                                      <ProgressBar width={50} percent={locker?.scoreValue / 10000} />
                                     </div>
                                   )}
                                 </div>
