@@ -1,9 +1,8 @@
 /* eslint-disable @next/next/link-passhref */
-import { useActiveWeb3React } from '../../hooks'
 import Head from 'next/head'
 import React, { useCallback, useEffect, useState } from 'react'
 import Search from '../../components/Search'
-import { classNames, isAddress } from '../../functions'
+import { classNames, isAddress, tryParseAmount } from '../../functions'
 import NavLink from '../../components/NavLink'
 import Link from 'next/link'
 import Card from '../../components/Card'
@@ -15,35 +14,58 @@ import { useTransactionAdder } from '../../state/transactions/hooks'
 import useLocker from '../../features/locker/useLocker'
 import { Disclosure } from '@headlessui/react'
 import * as moment from 'moment'
-import { useToken } from '../../hooks/Tokens'
+import { useCurrency, useToken } from '../../hooks/Tokens'
 import { CurrencyAmount } from '../../sdk'
-import Button from '../../components/Button'
 import { getAddress } from '@ethersproject/address'
 import { useRouter } from 'next/router'
 import ExtendLockModal from '../../modals/ExtendLockModal'
 import ProgressBar from '../../components/ProgressBar'
+import NumericalInput from '../../components/NumericalInput'
 import { utils } from 'ethers'
+import Web3Connect from '../../components/Web3Connect'
+import Button, { ButtonConfirmed, ButtonError } from '../../components/Button'
+import { AutoRow, RowBetween } from '../../components/Row'
+import Loader from '../../components/Loader'
+import { ApprovalState, useActiveWeb3React, useApproveCallback } from '../../hooks'
+import { SCORER_ADDRESS } from '../../constants'
+import { useAddPopup } from '../../state/application/hooks'
 
 export default function Locker(): JSX.Element {
   const { i18n } = useLingui()
-  const { account } = useActiveWeb3React()
-  const [tokenAddress, setTokenAddress] = useState(undefined)
+  const { account, chainId } = useActiveWeb3React()
+  const [tokenAddress, setTokenAddress] = useState('0xFF970A61A04b1cA14834A43f5dE4533eBDDB5CC8')
   const token = useToken(isAddress(tokenAddress) ? tokenAddress : undefined)
   const [pendingTx, setPendingTx] = useState(false)
   const [chosenLockDate, setChosenLockDate] = useState()
   const [chosenLockID, setChosenLockID] = useState()
+  const [commitmentValue, setCommitmentValue] = useState('')
 
   const [isExtendModalOpen, setIsExtendModalOpen] = useState(false)
   const addTransaction = useTransactionAdder()
 
   const [lockers, setLockers] = useState([])
 
+  const [openLockers, setOpenLockers] = useState([])
+
   const lockerContract = useLocker()
 
   const router = useRouter()
 
+  const addPopup = useAddPopup()
+
+  const assetToken = useCurrency(tokenAddress) || undefined
+
+  const typedValue = tryParseAmount(commitmentValue, assetToken)
+
+  const [approvalSubmitted, setApprovalSubmitted] = useState<boolean>(false)
+
+  const [approvalState, approve] = useApproveCallback(typedValue, SCORER_ADDRESS[chainId])
+
+  const errorMessage = isNaN(parseFloat(commitmentValue)) || parseFloat(commitmentValue) == 0 ? 'Invalid Amount' : ''
+
+  const allInfoSubmitted = errorMessage == ''
+
   useEffect(() => {
-    console.log('running again')
     if (isAddress(tokenAddress)) {
       lockerContract.getLockersByTokenAddress(tokenAddress).then((r) => {
         if (r.length > 0) {
@@ -54,6 +76,12 @@ export default function Locker(): JSX.Element {
       setLockers([])
     }
   }, [tokenAddress])
+
+  useEffect(() => {
+    if (approvalState === ApprovalState.PENDING) {
+      setApprovalSubmitted(true)
+    }
+  }, [approvalState, approvalSubmitted])
 
   const handleWithdraw = useCallback(
     async (id) => {
@@ -102,12 +130,54 @@ export default function Locker(): JSX.Element {
   }
 
   const toggleScore = (locker) => {
-    if (locker.scoreVisible) {
-      locker.scoreVisible = false
+    if (openLockers.includes(locker?.id)) {
+      setOpenLockers([])
     } else {
-      locker.scoreVisible = true
+      setCommitmentValue('')
+      setOpenLockers([locker?.id])
     }
   }
+
+  const handleCommit = useCallback(async () => {
+    if (allInfoSubmitted) {
+      setPendingTx(true)
+
+      try {
+        const tx = await lockerContract.commitCollateral(commitmentValue.toBigNumber(assetToken?.decimals))
+
+        if (tx.wait) {
+          const result = await tx.wait()
+          addPopup({
+            txn: { hash: result.transactionHash, summary: 'Successfully committed collateral', success: true },
+          })
+          setCommitmentValue('')
+        } else {
+          throw 'User denied transaction signature.'
+        }
+      } catch (err) {
+        addPopup({
+          txn: { hash: undefined, summary: `Failed to create lock: ${err}`, success: false },
+        })
+      } finally {
+        setPendingTx(false)
+      }
+    }
+  }, [allInfoSubmitted, addPopup, assetToken, tokenAddress, commitmentValue, lockerContract])
+
+  const handleApprove = useCallback(async () => {
+    await approve()
+  }, [approve])
+
+  useEffect(() => {
+    (async () => {
+      if (isAddress(tokenAddress)) {
+        const collateralValue = await lockerContract.getLockerCollateral(tokenAddress)
+        lockers.map((locker) => {
+          locker.collateralValue = collateralValue
+        })
+      }
+    })()
+  }, [handleCommit])
 
   return (
     <>
@@ -198,27 +268,114 @@ export default function Locker(): JSX.Element {
                             >
                               <div className="grid grid-cols-5">
                                 <div className="flex flex-col col-span-2 items-start justify-center">
-                                  <div className='flex flex-col sm:flex-row gap-2 items-start'>
+                                  <div className="flex flex-col sm:flex-row gap-2 items-start">
                                     {token?.name} ({token?.symbol})
                                     <div className="text-xs text-right md:text-base text-secondary">
                                       <Button
                                         variant="link"
-                                        style={{ width: '100%',padding: '0' }}
+                                        style={{ width: '100%', padding: '0' }}
                                         onClick={() => toggleScore(locker)}
                                       >
-                                        {!locker?.scoreVisible ? '+' : '-'}
+                                        {!openLockers.includes(locker?.id) ? '+' : '-'}
                                       </Button>
                                     </div>
                                   </div>
 
-                                  {locker?.scoreVisible && (
-                                    <div className="flex flex-col text-xs text-left md:text-base text-white">
-                                      {locker?.scoreValue <= 0
-                                        ? 'Lock does not meet our requirements'
-                                        : `Health Score ${utils.formatUnits(locker?.scoreValue, 2)}%:`}
-                                      <ProgressBar width={50} percent={locker?.scoreValue / 10000} />
+                                  {openLockers.includes(locker?.id) && (
+                                    <div className="flex flex-col gap-2">
+                                      <div className="flex flex-col text-xs text-left md:text-base text-white">
+                                        {locker?.scoreValue <= 0
+                                          ? 'Lock does not meet our requirements'
+                                          : `Health Score ${utils.formatUnits(locker?.scoreValue, 2)}%:`}
+                                        <ProgressBar width={50} percent={locker?.scoreValue / 10000} />
+                                      </div>
+                                      <div className="flex flex-col text-xs text-left md:text-base text-white">
+                                        Committed Collateral 40.0%:
+                                        <ProgressBar width={50} percent={locker?.scoreValue / 10000} />
+                                      </div>
+                                      <div className={'flex items-center w-64'}>
+                                        <NumericalInput
+                                          className={'p-3 text-base rounded bg-[#020A23]'}
+                                          id="token-amount-input"
+                                          value={commitmentValue}
+                                          onUserInput={(val) => {
+                                            setCommitmentValue(val)
+                                          }}
+                                          placeholder={'Tokens to commit'}
+                                        />
+                                      </div>
+                                      <div className={'flex items-center w-64'}>
+                                        <div className={'flex items-center w-full'}>
+                                          {!account ? (
+                                            <Web3Connect
+                                              size="lg"
+                                              color="gray"
+                                              className="w-full"
+                                              buttonText="Connect"
+                                            />
+                                          ) : !allInfoSubmitted ? (
+                                            <ButtonError
+                                              className="font-bold"
+                                              style={{ width: '100%' }}
+                                              disabled={!allInfoSubmitted}
+                                            >
+                                              {errorMessage}
+                                            </ButtonError>
+                                          ) : (
+                                            <RowBetween>
+                                              {approvalState !== ApprovalState.APPROVED && (
+                                                <ButtonConfirmed
+                                                  onClick={handleApprove}
+                                                  disabled={
+                                                    approvalState !== ApprovalState.NOT_APPROVED ||
+                                                    approvalSubmitted ||
+                                                    !allInfoSubmitted
+                                                  }
+                                                >
+                                                  {approvalState === ApprovalState.PENDING ? (
+                                                    <div className={'p-2'}>
+                                                      <AutoRow gap="6px" justify="center">
+                                                        Approving <Loader stroke="white" />
+                                                      </AutoRow>
+                                                    </div>
+                                                  ) : (
+                                                    i18n._(t`Approve`)
+                                                  )}
+                                                </ButtonConfirmed>
+                                              )}
+                                              {approvalState === ApprovalState.APPROVED && (
+                                                <ButtonError
+                                                  className="font-bold text-light"
+                                                  onClick={handleCommit}
+                                                  style={{
+                                                    width: '100%',
+                                                  }}
+                                                  disabled={
+                                                    approvalState !== ApprovalState.APPROVED ||
+                                                    !allInfoSubmitted ||
+                                                    pendingTx
+                                                  }
+                                                >
+                                                  {pendingTx ? (
+                                                    <div className={'p-2'}>
+                                                      <AutoRow gap="6px" justify="center">
+                                                        Committing <Loader stroke="white" />
+                                                      </AutoRow>
+                                                    </div>
+                                                  ) : (
+                                                    i18n._(t`Commit`)
+                                                  )}
+                                                </ButtonError>
+                                              )}
+                                            </RowBetween>
+                                          )}
+                                        </div>
+                                      </div>
                                     </div>
                                   )}
+                                  {/* {locker?.scoreVisible && (
+
+                                  )} */}
                                 </div>
                                 <div className="flex flex-col justify-center items-center">
                                   {token?.name

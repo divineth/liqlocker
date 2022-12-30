@@ -78,6 +78,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   size?: ButtonSize
   variant?: ButtonVariant
   ref?: React.Ref<HTMLButtonElement>
+  buttonText?: String
 }
 
 function Button({

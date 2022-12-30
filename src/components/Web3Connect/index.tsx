@@ -14,7 +14,7 @@ const NetworkIcon = styled(Activity)`
   height: 16px;
 `
 
-export default function Web3Connect({ color = 'gray', size = 'sm', className = '', ...rest }: ButtonProps) {
+export default function Web3Connect({ color = 'gray', size = 'sm', className = '', buttonText='Connect to Wallet' , ...rest }: ButtonProps) {
   const { i18n } = useLingui()
   const toggleWalletModal = useWalletModalToggle()
   const { error } = useWeb3React()
@@ -40,7 +40,7 @@ export default function Web3Connect({ color = 'gray', size = 'sm', className = '
       size={size}
       {...rest}
     >
-      {i18n._(t`Connect to a wallet`)}
+      {i18n._(t`${buttonText}`)}
     </Button>
   )
 }

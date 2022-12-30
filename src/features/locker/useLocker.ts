@@ -56,8 +56,10 @@ export default function useLocker() {
           for (const id of lockersIds) {
             const lockerInfo = await contract?.lockedToken(id.toString())
             const scoreVisible = false
+            // const scoreValue = 5000
             const scoreValue = lockerInfo ? await scorerContract?.getScore(lockerInfo?.token) : 0;
-            result.push({ id, scoreVisible, scoreValue, ...lockerInfo })
+            const collateralValue = lockerInfo ? await scorerContract?.getCollateral(lockerInfo?.token) : 0;
+            result.push({ id, scoreVisible, scoreValue, collateralValue, ...lockerInfo })
           }
         }
         return result
@@ -66,8 +68,32 @@ export default function useLocker() {
         return e
       }
     },
-    [contract, tokenContract]
+    [contract, tokenContract, scorerContract]
   )
 
-  return { lockTokens, getLockersByTokenAddress, withdrawTokens, extendLock }
+  const getLockerCollateral = useCallback(
+    async (token: string) => {
+      try {
+        return await scorerContract?.getCollateral(token)
+      } catch (e) {
+        console.error(e)
+        return e
+      }
+    },
+    [contract, scorerContract]
+  )
+
+  const commitCollateral = useCallback(
+    async (amount: BigNumber) => {
+      try {
+        return await scorerContract?.commitCollateral(amount.toString())
+      } catch (e) {
+        console.error(e)
+        return e
+      }
+    },
+    [contract, scorerContract]
+  )
+
+  return { lockTokens, getLockersByTokenAddress, withdrawTokens, extendLock, getLockerCollateral, commitCollateral }
 }
